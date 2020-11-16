@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30626.31
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConveyorApp", "ConveyorApp\ConveyorApp.csproj", "{51655C80-83FD-4F2D-BB87-F2A8AA9CD57A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConveyorApp", "ConveyorApp\ConveyorApp.csproj", "{51655C80-83FD-4F2D-BB87-F2A8AA9CD57A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetApi", "NetApi\NetApi.csproj", "{3B7E9CB4-98DE-4429-BE54-8B1394C7748F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniTest", "UniTest\UniTest.csproj", "{CBDCFBB9-5B1D-46DE-A281-75202B03C573}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{3B7E9CB4-98DE-4429-BE54-8B1394C7748F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B7E9CB4-98DE-4429-BE54-8B1394C7748F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B7E9CB4-98DE-4429-BE54-8B1394C7748F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBDCFBB9-5B1D-46DE-A281-75202B03C573}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBDCFBB9-5B1D-46DE-A281-75202B03C573}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBDCFBB9-5B1D-46DE-A281-75202B03C573}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBDCFBB9-5B1D-46DE-A281-75202B03C573}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
