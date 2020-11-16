@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ConveyorApp\ConveyorApp.csproj" />
     <ProjectReference Include="..\NetApi\NetApi.csproj" />
   </ItemGroup>
 

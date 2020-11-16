@@ -7,7 +7,7 @@ namespace ConveyorApp
     /// <summary>
     /// Конвейр основанный на реализации очереди
     /// </summary>
-    class QueueConveyor :
+    public class QueueConveyor :
         IConveyor
     {
         /// <summary>
@@ -62,6 +62,22 @@ namespace ConveyorApp
 
             //Тип нового объекта
             ProductType type = (ProductType)Type;
+            switch (Type)
+            {
+                //1 - значит хороший продукт
+                case 1:
+                    type = ProductType.good;
+                    break;
+
+                //2 - дефективный продукт
+                case 2:
+                    type = ProductType.defective;
+                    break;
+
+                //Если ни одного из значений не подходит - выбросить ошибку
+                default:
+                    throw new InvalidCastException("Не правильный код типа");
+            }
 
             //Создание нового объекта
             ProductObject product = new ProductObject(type);
