@@ -6,7 +6,7 @@ using System;
 namespace UniTest.NetApi
 {
     [TestClass]
-    public class BasedSocketTest
+    public class BasedSocketTests
     {
         string address = "127.0.0.1";
         int port = 8123;
