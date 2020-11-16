@@ -43,7 +43,7 @@ namespace ConveyorApp
                     //В зависимоти от стояния добавляется объект, с номером аналогичным состоянием
                     if (product.IsGood())
                         conveyorState.Add(1);
-                    if (product.IsFale())
+                    if (product.IsDefective())
                         conveyorState.Add(2);
                 }
 

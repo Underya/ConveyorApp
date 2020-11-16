@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
+using System.Runtime.CompilerServices;
 
 namespace ConveyorApp
 {
     /// <summary>
     /// Возможные типы продуктов
     /// </summary>
-    enum ProductType
+    public enum ProductType
     {
         good = 1,
         defective = 2
@@ -16,7 +18,7 @@ namespace ConveyorApp
     /// <summary>
     /// Один продукт конвеерной ленты
     /// </summary>
-    class ProductObject
+    public class ProductObject
     {
         /// <summary>
         /// Тип продукта
@@ -70,7 +72,7 @@ namespace ConveyorApp
         /// Является ли продукт бракованным
         /// </summary>
         /// <returns></returns>
-        public bool IsFale()
+        public bool IsDefective()
         {
             if (type == ProductType.defective)
                 return true;

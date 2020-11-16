@@ -16,8 +16,6 @@ namespace UniTest.NetApi
             address3 = "127.0.0.4";
         int port = 8124, port2 =8125, port3 = 8126;
 
-        string MessageText = "Сообщение для проверки. Test Message";
-        
 
         [TestMethod]
         public void CreateListenSocket()
