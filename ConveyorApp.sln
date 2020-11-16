@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30626.31
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConveyorApp", "ConveyorApp\ConveyorApp.csproj", "{51655C80-83FD-4F2D-BB87-F2A8AA9CD57A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetApi", "NetApi\NetApi.csproj", "{3B7E9CB4-98DE-4429-BE54-8B1394C7748F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{51655C80-83FD-4F2D-BB87-F2A8AA9CD57A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51655C80-83FD-4F2D-BB87-F2A8AA9CD57A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51655C80-83FD-4F2D-BB87-F2A8AA9CD57A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B7E9CB4-98DE-4429-BE54-8B1394C7748F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B7E9CB4-98DE-4429-BE54-8B1394C7748F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B7E9CB4-98DE-4429-BE54-8B1394C7748F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B7E9CB4-98DE-4429-BE54-8B1394C7748F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
