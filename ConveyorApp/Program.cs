@@ -9,9 +9,15 @@ namespace ConveyorApp
         static void Main(string[] args)
         {
             JSON json = new JSON();
-            json.Serialize("text");
-            json.Serialize(new Exception("excetpion text"));
-            json.Serialize(new int[3] { 1, 2, 1 });
+            byte[] b1 = json.Serialize("text");
+            byte[] b2 = json.Serialize(new Exception("excetpion text"));
+            byte[] b3 = json.Serialize(new int[3] { 1, 2, 1 });
+            byte[] b4 = json.Serialize(new ListenSocket("127.0.0.1", 1234));
+
+            object o1 = json.Deserialize(b1);
+            object o2 = json.Deserialize(b2);
+            object o3 = json.Deserialize(b3);
+            object o4 = json.Deserialize(b4);
             return;
             try
             {
