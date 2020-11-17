@@ -65,7 +65,6 @@ namespace NetApi
 
         /// <summary>
         /// Отправка сообщения на указанный адрес.
-        /// Перед отправкой необходимо соедениться с адресом с помощью метода Connect
         /// </summary>
         /// <param name="Message">Сообщение, которое надо отправить</param>
         /// <param name="MessageSize">Размер сообщения </param>
