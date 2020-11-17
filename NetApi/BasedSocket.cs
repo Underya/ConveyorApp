@@ -27,8 +27,15 @@ namespace NetApi
         {
             //Сохранение инфомрации об адресе
             ipAdress = new IPEndPoint(IPAddress.Parse(address), port);
-            //Создание объекта сокета
-            socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        }
+
+        /// <summary>
+        /// Создание нового сокета с указанным адресом
+        /// </summary>
+        /// <returns></returns>
+        protected Socket GetNewSoket()
+        {
+            return new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         }
 
         /// <summary>
@@ -36,9 +43,13 @@ namespace NetApi
         /// </summary>
         ~BasedSocket()
         {
-            //Уничтожение сокета
-            socket.Shutdown(SocketShutdown.Both);
-            socket.Close();
+            //Если сокет существует, его надо закрыть
+            if (socket != null)
+            {
+                //Уничтожение сокета
+                socket.Shutdown(SocketShutdown.Both);
+                socket.Close();
+            }
         }
     }
 }

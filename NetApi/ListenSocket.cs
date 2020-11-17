@@ -63,7 +63,6 @@ namespace NetApi
             
             do
             {
-
                 //Получение текста сообщения
                 do
                 {
