@@ -51,6 +51,7 @@ namespace ConveyorGui
                 timer.Start();
                 //Пользователю выводиться сообщение
                 MessageBox.Show($"Не удалось подклюиться к серверу. Осталось попыток: {MaxCountConnect}");
+                ShowError($"Не удалось подклюиться к серверу. Осталось попыток: {MaxCountConnect}");
                 return;
             }
 
@@ -87,7 +88,7 @@ namespace ConveyorGui
             catch
             {
                 //Если вылтело исключение - то продолжать подключаться дальше
-                MessageBox.Show($"Не удалось подклюиться к серверу. Осталось попыток: {MaxCountConnect}");
+                ShowError($"Не удалось подклюиться к серверу. Осталось попыток: {MaxCountConnect}");
                 return;
             }
 
@@ -171,6 +172,26 @@ namespace ConveyorGui
             api.PushProduct();
             //Обновление конвейера
             RefreshPanel();
+        }
+
+        /// <summary>
+        /// Вывод сообщения об ошибке
+        /// </summary>
+        /// <param name="error_text">Текст ошибки</param>
+        void ShowError(string error_text)
+        {
+            ErrorText.Text = error_text;
+            ErrorText.Visible = true;
+            ErrorHandler.Visible = true;
+        }
+
+        /// <summary>
+        /// Скрытие текста с ошибкой в интерфейсе
+        /// </summary>
+        void HideError()
+        {
+            ErrorHandler.Visible = false;
+            ErrorText.Visible = false;
         }
     }
 }

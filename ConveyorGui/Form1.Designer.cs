@@ -36,6 +36,8 @@ namespace ConveyorGui
             this.PushButton = new System.Windows.Forms.Button();
             this.ConveyorPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
+            this.ErrorHandler = new System.Windows.Forms.Label();
+            this.ErrorText = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -99,7 +101,7 @@ namespace ConveyorGui
             // ConveyorPanel
             // 
             this.ConveyorPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.ConveyorPanel.Location = new System.Drawing.Point(237, 129);
+            this.ConveyorPanel.Location = new System.Drawing.Point(234, 69);
             this.ConveyorPanel.Name = "ConveyorPanel";
             this.ConveyorPanel.Size = new System.Drawing.Size(460, 140);
             this.ConveyorPanel.TabIndex = 3;
@@ -108,17 +110,44 @@ namespace ConveyorGui
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(410, 94);
+            this.label1.Location = new System.Drawing.Point(407, 34);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(108, 28);
             this.label1.TabIndex = 4;
             this.label1.Text = "Конвейер";
+            // 
+            // ErrorHandler
+            // 
+            this.ErrorHandler.AutoSize = true;
+            this.ErrorHandler.Font = new System.Drawing.Font("Segoe UI", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ErrorHandler.ForeColor = System.Drawing.Color.Firebrick;
+            this.ErrorHandler.Location = new System.Drawing.Point(407, 227);
+            this.ErrorHandler.Name = "ErrorHandler";
+            this.ErrorHandler.Size = new System.Drawing.Size(98, 28);
+            this.ErrorHandler.TabIndex = 5;
+            this.ErrorHandler.Text = "Ошибка!";
+            this.ErrorHandler.Visible = false;
+            // 
+            // ErrorText
+            // 
+            this.ErrorText.AutoSize = true;
+            this.ErrorText.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.ErrorText.ForeColor = System.Drawing.Color.IndianRed;
+            this.ErrorText.Location = new System.Drawing.Point(254, 265);
+            this.ErrorText.Name = "ErrorText";
+            this.ErrorText.Size = new System.Drawing.Size(72, 20);
+            this.ErrorText.TabIndex = 6;
+            this.ErrorText.Text = "Ошибка!";
+            this.ErrorText.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ErrorText.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(716, 373);
+            this.Controls.Add(this.ErrorText);
+            this.Controls.Add(this.ErrorHandler);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.ConveyorPanel);
             this.Controls.Add(this.PushButton);
@@ -144,6 +173,8 @@ namespace ConveyorGui
         private System.Windows.Forms.Button PushButton;
         private System.Windows.Forms.FlowLayoutPanel ConveyorPanel;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label ErrorHandler;
+        private System.Windows.Forms.Label ErrorText;
     }
 }
 
