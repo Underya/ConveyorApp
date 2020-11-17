@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetApi", "NetApi\NetApi.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UniTest", "UniTest\UniTest.csproj", "{CBDCFBB9-5B1D-46DE-A281-75202B03C573}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestInterface", "TestInterface\TestInterface.csproj", "{FD27258A-049A-4E23-AFE3-6936C81B9E66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestInterface", "TestInterface\TestInterface.csproj", "{FD27258A-049A-4E23-AFE3-6936C81B9E66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConveyorGui", "ConveyorGui\ConveyorGui.csproj", "{9CB5B21C-4576-4A4B-A37A-D5F71C9D5D2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{FD27258A-049A-4E23-AFE3-6936C81B9E66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD27258A-049A-4E23-AFE3-6936C81B9E66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD27258A-049A-4E23-AFE3-6936C81B9E66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CB5B21C-4576-4A4B-A37A-D5F71C9D5D2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CB5B21C-4576-4A4B-A37A-D5F71C9D5D2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CB5B21C-4576-4A4B-A37A-D5F71C9D5D2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CB5B21C-4576-4A4B-A37A-D5F71C9D5D2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
