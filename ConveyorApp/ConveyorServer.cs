@@ -67,6 +67,20 @@ namespace ConveyorApp
             //Получение сообщения и его певерод в строку
             string Calling = Encoding.Unicode.GetString(Messagem, 0, SizeMessage);
             Console.WriteLine("Сообщение: {0}", Calling);
+            //В зависимости от типа сообщения, вызов соотсвествующей функции разбора
+            if (Calling.ToLower() == "get")
+                GetCalling();
+
+        }
+
+        /// <summary>
+        /// Получение запроса на состояние конееера
+        /// </summary>
+        void GetCalling()
+        {
+            //Отправка ответа
+            byte[] resp = new byte[3] { 1, 2, 1 };
+            listenSocket.SendAnswer(resp);
         }
 
     }

@@ -24,6 +24,11 @@ namespace NetApi
         const int MaxConnect = 100;
 
         /// <summary>
+        /// Сокет для отправления ответов на запросы
+        /// </summary>
+        Socket answerSocket = null;
+
+        /// <summary>
         /// Создания сокета для получения сообщений по указанному адресу и порту
         /// </summary>
         /// <param name="address">Адрес, который слушает сокет</param>
@@ -51,6 +56,30 @@ namespace NetApi
         public AcceptMessageDelegate AcceptMessage{ get; set; }
 
         /// <summary>
+        /// Получение сокета для чтения запроса
+        /// </summary>
+        /// <returns></returns>
+        Socket GetAnswerSocket()
+        {
+            //Если есть старый сокет, она зыкрывается 
+            if (answerSocket != null)
+                answerSocket.Close();
+            //Получение нового сокета
+            answerSocket = socket.Accept();
+            return answerSocket;
+        }
+
+        /// <summary>
+        /// Отправка ответа на запрос
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="SizeMessage"></param>
+        public void SendAnswer(byte[] data)
+        {
+            answerSocket.Send(data);
+        }
+
+        /// <summary>
         /// Старт прослушивания сообщений. Блокирует вызывающий поток
         /// </summary>
         public void StartListen()
@@ -59,22 +88,18 @@ namespace NetApi
             int countByte = 0;
             byte[] data = new byte[MaxSize];
 
-            Socket response = null;
             //Ожидание сообщения
-            response = socket.Accept();
+            GetAnswerSocket();
             
             do
-            {
+             {
                 //Получение текста сообщения
                 do
                 {
-                    countByte = response.Receive(data);
-                } while (response.Available > 0);
+                    countByte = answerSocket.Receive(data);
+                } while (answerSocket.Available > 0);
 
             } while (countByte == 0);
-
-            //Закрытие соеденения
-            response.Close();
 
             //Отправка сообщения слушателям
             AcceptMessage(data, countByte);
