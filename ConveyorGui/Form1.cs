@@ -95,6 +95,8 @@ namespace ConveyorGui
             //Если удалось подключиться
             //Удалить таймер
             timer.Stop();
+            //Убрать ошибку
+            HideError();
             //Запустить работу
             StartWork();
         }
@@ -125,7 +127,18 @@ namespace ConveyorGui
         /// </summary>
         void RefreshPanel()
         {
-            int[] state = api.GetState();
+            int[] state = null;
+            try
+            {
+                state = api.GetState();
+            }
+            catch
+            {
+                ShowError("Не удалось получить состояние сервера!");
+                return;
+            }
+            //Скрытие ошибок
+            HideError();
             //Удаление всех элементов
             ConveyorPanel.Controls.Clear();
             //Добавление новых
@@ -151,13 +164,19 @@ namespace ConveyorGui
         /// <param name="e"></param>
         private void AddButton_Click(object sender, EventArgs e)
         {
-            //Если выбранны годный продукт
-            if (GoodRadio.Checked)
-                api.AddGoodProduct();
-            //Если выбран дефективный продукт
-            if (DefectiveButton.Checked)
-                api.AddDefectiveProduct();
-
+            try
+            {
+                //Если выбранны годный продукт
+                if (GoodRadio.Checked)
+                    api.AddGoodProduct();
+                //Если выбран дефективный продукт
+                if (DefectiveButton.Checked)
+                    api.AddDefectiveProduct();
+            } catch(Exception err)
+            {
+                ShowError(err.Message);
+                return;
+            }
             //Обновление конвейера
             RefreshPanel();
         }
@@ -169,7 +188,14 @@ namespace ConveyorGui
         /// <param name="e"></param>
         private void PushButton_Click(object sender, EventArgs e)
         {
-            api.PushProduct();
+            try
+            {
+                api.PushProduct();
+            } catch(Exception err)
+            {
+                ShowError(err.Message);
+                return;
+            }
             //Обновление конвейера
             RefreshPanel();
         }
@@ -192,6 +218,11 @@ namespace ConveyorGui
         {
             ErrorHandler.Visible = false;
             ErrorText.Visible = false;
+        }
+
+        private void Form1_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
 }
