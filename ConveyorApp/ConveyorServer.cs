@@ -12,6 +12,11 @@ namespace ConveyorApp
     {
 
         /// <summary>
+        /// Указание, необходимо ли серверу продолжать работать
+        /// </summary>
+        bool work = false;
+
+        /// <summary>
         /// Конвеер с продуктами
         /// </summary>
         IConveyor conveyor = null;
@@ -41,8 +46,14 @@ namespace ConveyorApp
         public void StartLisetn()
         {
             Console.WriteLine("Сервер запущен");
-            //Запуск прослушивания
-            listenSocket.StartListen();
+            //Указание, что сервер запушен
+            work = true;
+
+            while (work)
+            {
+                //Запуск прослушивания
+                listenSocket.StartListen();
+            }
         }
 
         /// <summary>

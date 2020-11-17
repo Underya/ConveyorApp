@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Net.Sockets;
 
 namespace NetApi
 {
@@ -38,16 +39,23 @@ namespace NetApi
         /// <returns></returns>
         public bool SendMessage(byte[] Message, int MessageSize)
         {
+            //СОздание нового сокета
+            Socket nsocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            nsocket.Connect(ipAdress);
             //Отправка сообщения
-            int rezult = socket.Send(Message);
+            int rezult = nsocket.Send(Message);
+
+            bool returnResult = true;
 
             //Если размер изначального и отправленного сообщения не совпадает
             //То отправить сообщение не удалось
             if (rezult != MessageSize)
-                return false;
+                returnResult = false;
 
+            nsocket.Shutdown(SocketShutdown.Both);
+            nsocket.Close();
             //Сообщение успешно отправлено
-            return true;
+            return returnResult;
         }
 
     }

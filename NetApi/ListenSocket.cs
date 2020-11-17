@@ -32,6 +32,9 @@ namespace NetApi
         {
             //Подготовка сокета к прослушке
             socket.Bind(ipAdress);
+            //Начала прослушивания
+            //Указание максимального количества подключений
+            socket.Listen(MaxConnect);
         }
 
         /// <summary>
@@ -54,14 +57,12 @@ namespace NetApi
             int countByte = 0;
             byte[] data = new byte[MaxSize];
 
-            //Начала прослушивания
-            //Указание максимального количества подключений
-            socket.Listen(MaxConnect);
-
+            Socket response = null;
+            //Ожидание сообщения
+            response = socket.Accept();
+            
             do
             {
-                //Ожидание сообщения
-                Socket response = socket.Accept();
 
                 //Получение текста сообщения
                 do
@@ -70,6 +71,9 @@ namespace NetApi
                 } while (response.Available > 0);
 
             } while (countByte == 0);
+
+            //Закрытие соеденения
+            response.Close();
 
             //Отправка сообщения слушателям
             AcceptMessage(data, countByte);
