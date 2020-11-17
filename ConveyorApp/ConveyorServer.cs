@@ -81,8 +81,10 @@ namespace ConveyorApp
         void GetCalling()
         {
             //Отправка ответа
-            byte[] resp = new byte[3] { 1, 2, 1 };
-            listenSocket.SendAnswer(resp);
+            int[] resp = conveyor.State.ToArray();
+            //Сериализация
+            JSON json = new JSON();
+            listenSocket.SendAnswer(json.Serialize(resp));
         }
 
         /// <summary>

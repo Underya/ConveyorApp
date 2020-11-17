@@ -60,7 +60,11 @@ namespace NetApi
         {
             byte[] Data = new byte[3000];
             SizeMessage = answerSocket.Receive(Data);
-            return Data;
+            //Обрезка
+            byte[] retData = new byte[SizeMessage];
+            for (int i = 0; i < SizeMessage; i++)
+                retData[i] = Data[i]; 
+            return retData;
         }
 
         /// <summary>

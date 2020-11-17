@@ -101,8 +101,13 @@ namespace NetApi
 
             } while (countByte == 0);
 
+            //Образека массива
+            byte[] retData = new byte[countByte];
+            for (int i = 0; i < countByte; i++)
+                retData[i] = data[i];
+
             //Отправка сообщения слушателям
-            AcceptMessage(data, countByte);
+            AcceptMessage(retData, countByte);
         }
     }
 }

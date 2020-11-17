@@ -18,7 +18,6 @@ namespace ConveyorApp
             object o2 = json.Deserialize(b2);
             object o3 = json.Deserialize(b3);
             object o4 = json.Deserialize(b4);
-            return;
             try
             {
                 QueueConveyor queueConveyor = new QueueConveyor();

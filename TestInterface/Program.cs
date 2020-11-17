@@ -12,11 +12,9 @@ namespace TestInterface
     class Program
     {
         static void Main(string[] args)
-        {
-            byte[] GetMesage = ToUnicodeByte("Get");
-            byte[] AddProduct = ToUnicodeByte("Add:1");
-            byte[] AddDefective = ToUnicodeByte("Add:2");
-            SendSocket sendSocket = new SendSocket("127.0.0.1", 8001);
+        {   SendSocket sendSocket = new SendSocket("127.0.0.1", 8001);
+            ConveyorApi api = new ConveyorApi(sendSocket);
+
             //Меню для интерактивного теста приложения
             while (true)
             {
@@ -33,12 +31,9 @@ namespace TestInterface
                 {
                     try
                     {
-                        sendSocket.SendMessage(GetMesage, GetMesage.Length);
-                        //Получение ответа
-                        int retSize = -1;
-                        byte[] data = sendSocket.GetAnswer(out retSize);
+                        int[] data = api.GetState();
                         Console.Write("Ответ:");
-                        for (int i = 0; i < retSize; i++)
+                        for (int i = 0; i < data.Length; i++)
                             Console.Write("{0} ", (int)data[i]);
                         Console.WriteLine("");
 
@@ -50,14 +45,10 @@ namespace TestInterface
 
                 if(keyInfo.Key == ConsoleKey.A)
                 {
-                    sendSocket.SendMessage(AddProduct, AddProduct.Length);
-                    AddAnswer(sendSocket);
                 }
 
                 if(keyInfo.Key == ConsoleKey.D)
                 {
-                    sendSocket.SendMessage(AddDefective, AddDefective.Length);
-                    AddAnswer(sendSocket);
                 }
 
                 if (keyInfo.Key == ConsoleKey.E)
