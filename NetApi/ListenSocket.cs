@@ -30,6 +30,8 @@ namespace NetApi
         /// <param name="port">Порт, который слушает сокет</param>
         public ListenSocket(string address, int port) :base(address, port)
         {
+            //Создание сокета
+            socket = GetNewSoket();
             //Подготовка сокета к прослушке
             socket.Bind(ipAdress);
             //Начала прослушивания
