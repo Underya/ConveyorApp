@@ -79,7 +79,8 @@ namespace ConveyorApp
                 GetCalling();
             if (Calling.ToLower().Contains("add"))
                 AddNewProduct(Calling);
-
+            if (Calling.ToLower() == "push")
+                PushProduct();
         }
 
         /// <summary>
@@ -125,5 +126,21 @@ namespace ConveyorApp
             listenSocket.SendAnswer(json.Serialize("Ok"));
         }
 
+        /// <summary>
+        /// Выталкивание продукта с конвеера
+        /// </summary>
+        void PushProduct()
+        {
+            try
+            {
+                conveyor.PushProdcut();
+                //Сообщение об успешном выполнении
+                listenSocket.SendAnswer(json.Serialize("Ok"));
+            }catch(Exception err)
+            {
+                //Если есть ошибка, то она отправляется пользователю
+                listenSocket.SendAnswer(json.Serialize(err));
+            }
+        }
     }
 }

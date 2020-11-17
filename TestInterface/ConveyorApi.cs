@@ -93,7 +93,7 @@ namespace TestInterface
         /// </summary>
         public void PushProduct()
         {
-
+            ExecuteVoidCommand(PushCommand);
         }
 
         /// <summary>

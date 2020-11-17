@@ -22,39 +22,46 @@ namespace TestInterface
                 Console.WriteLine("G - Запрос на состояние очереди");
                 Console.WriteLine("A - Добавление нового продукта");
                 Console.WriteLine("D - Добавление дефективного продукта");
+                Console.WriteLine("P - Выкинуть продукт");
                 Console.WriteLine("E - выход");
 
                 ConsoleKeyInfo keyInfo = Console.ReadKey();
-
-                //Запрос на получение состояния сервера
-                if (keyInfo.Key == ConsoleKey.G)
+                try
                 {
-                    int[] data = api.GetState();
-                    Console.Write("Ответ:");
-                    for (int i = 0; i < data.Length; i++)
-                        Console.Write("{0} ", (int)data[i]);
-                    Console.WriteLine("");
-                }
+                    //Запрос на получение состояния сервера
+                    if (keyInfo.Key == ConsoleKey.G)
+                    {
+                        int[] data = api.GetState();
+                        Console.Write("Ответ:");
+                        for (int i = 0; i < data.Length; i++)
+                            Console.Write("{0} ", (int)data[i]);
+                        Console.WriteLine("");
+                    }
 
-                if(keyInfo.Key == ConsoleKey.A)
+                    if (keyInfo.Key == ConsoleKey.A)
+                    {
+                        api.AddGoodProduct();
+                    }
+
+                    if (keyInfo.Key == ConsoleKey.D)
+                    {
+                        api.AddDefectiveProduct();
+                    }
+
+                    if (keyInfo.Key == ConsoleKey.P)
+                    {
+                        api.PushProduct();
+                    }
+
+                    if (keyInfo.Key == ConsoleKey.E)
+                    {
+                        return;
+                    }
+
+                } catch(Exception err)
                 {
-                    api.AddGoodProduct();
+                    Console.WriteLine(err.Message);
                 }
-
-                if(keyInfo.Key == ConsoleKey.D)
-                {
-                    api.AddDefectiveProduct();
-                }
-
-                if(keyInfo.Key == ConsoleKey.P)
-                {
-                }
-
-                if (keyInfo.Key == ConsoleKey.E)
-                {
-                    return;
-                }
-
             }
 
             Console.WriteLine("Нажмите любую клавишу");
