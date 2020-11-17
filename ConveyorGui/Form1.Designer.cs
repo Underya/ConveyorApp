@@ -74,6 +74,7 @@ namespace ConveyorGui
             // 
             // AddButton
             // 
+            this.AddButton.Enabled = false;
             this.AddButton.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.AddButton.Location = new System.Drawing.Point(35, 181);
             this.AddButton.Name = "AddButton";
@@ -85,6 +86,7 @@ namespace ConveyorGui
             // 
             // PushButton
             // 
+            this.PushButton.Enabled = false;
             this.PushButton.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.PushButton.Location = new System.Drawing.Point(35, 265);
             this.PushButton.Name = "PushButton";
@@ -96,9 +98,10 @@ namespace ConveyorGui
             // 
             // ConveyorPanel
             // 
+            this.ConveyorPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.ConveyorPanel.Location = new System.Drawing.Point(237, 129);
             this.ConveyorPanel.Name = "ConveyorPanel";
-            this.ConveyorPanel.Size = new System.Drawing.Size(455, 140);
+            this.ConveyorPanel.Size = new System.Drawing.Size(460, 140);
             this.ConveyorPanel.TabIndex = 3;
             // 
             // label1

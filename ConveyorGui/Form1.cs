@@ -13,7 +13,9 @@ namespace ConveyorGui
 {
     public partial class Form1 : Form
     {
-
+        /// <summary>
+        /// Объект для общения с сервером
+        /// </summary>
         ConveyorApi api = null;
 
         public Form1()
@@ -22,9 +24,89 @@ namespace ConveyorGui
             //Создание API для общения с сервером
             SendSocket sendSocket = new SendSocket("127.0.0.1", 8001);
             api = new ConveyorApi(sendSocket);
-            //Пока - тест
+            TryConnect();
+        }
+
+        /// <summary>
+        /// Таймер для попытки подключения
+        /// </summary>
+        Timer timer = null;
+
+        /// <summary>
+        /// Запуск таймера для поключения
+        /// </summary>
+        void TryConnect()
+        {
+            //Попытка подключения
+            try
+            {
+                api.GetState();
+            }
+            catch
+            {
+                //Если не вышло, запускается метод для подключения
+                timer = new Timer();
+                timer.Interval = milliSecond;
+                timer.Tick += TimerTick;
+                timer.Start();
+                //Пользователю выводиться сообщение
+                MessageBox.Show($"Не удалось подклюиться к серверу. Осталось попыток: {MaxCountConnect}");
+                return;
+            }
+
+            //Если получилось - то просто запускается нормальная работа приложения
             StartWork();
         }
+
+        /// <summary>
+        /// Внутри функции происходит попытка подключения к серверу
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TimerTick(object sender, EventArgs e)
+        {
+            //Уменьшение количества попыток подключения
+            MaxCountConnect--;
+            //Если попытка закончились
+            if(MaxCountConnect <= 0)
+            {
+                MessageBox.Show("Не удалось подключиться к серверу. Запустите сервер, и попробуйте снова");
+                Close();
+                return;
+            }
+
+            //Попытка подключения
+            try
+            {
+                //Пересоздаётся объект для нового сокета
+                api = null;
+                SendSocket sendSocket = new SendSocket("127.0.0.1", 8001);
+                api = new ConveyorApi(sendSocket);
+                api.GetState();
+            }
+            catch
+            {
+                //Если вылтело исключение - то продолжать подключаться дальше
+                MessageBox.Show($"Не удалось подклюиться к серверу. Осталось попыток: {MaxCountConnect}");
+                return;
+            }
+
+            //Если удалось подключиться
+            //Удалить таймер
+            timer.Stop();
+            //Запустить работу
+            StartWork();
+        }
+
+        /// <summary>
+        /// Максимальное количество попыток подключения
+        /// </summary>
+        int MaxCountConnect = 9;
+
+        /// <summary>
+        /// Время, через котороое будут повторятся попытка подключения
+        /// </summary>
+        int milliSecond = 10*1000;
 
         /// <summary>
         /// Запуск работы приложения
@@ -32,6 +114,9 @@ namespace ConveyorGui
         void StartWork()
         {
             RefreshPanel();
+            //Включить кнопки
+            AddButton.Enabled = true;
+            PushButton.Enabled = true;
         }
 
         /// <summary>
