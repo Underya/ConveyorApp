@@ -77,7 +77,32 @@ namespace TestInterface
         /// </summary>
         public void AddGoodProduct()
         {
-            sendSocket.SendMessage(AddGoodCommand, AddGoodCommand.Length);
+            ExecuteVoidCommand(AddGoodCommand);
+        }
+
+        /// <summary>
+        /// Добавление брака в конвеер
+        /// </summary>
+        public void AddDefectiveProduct()
+        {
+            ExecuteVoidCommand(AddDefectiveCommmand);
+        }
+        
+        /// <summary>
+        /// Выбросить элемент в конвеере
+        /// </summary>
+        public void PushProduct()
+        {
+
+        }
+
+        /// <summary>
+        /// Отправление комманды серверу. Отслеживается только ошибка
+        /// </summary>
+        /// <param name=""></param>
+        void ExecuteVoidCommand(byte[] command)
+        {
+            sendSocket.SendMessage(command, command.Length);
             //Получение ответа
             int sizeAnswer = 0;
             byte[] answer = sendSocket.GetAnswer(out sizeAnswer);

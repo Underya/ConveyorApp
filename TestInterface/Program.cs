@@ -29,18 +29,11 @@ namespace TestInterface
                 //Запрос на получение состояния сервера
                 if (keyInfo.Key == ConsoleKey.G)
                 {
-                    try
-                    {
-                        int[] data = api.GetState();
-                        Console.Write("Ответ:");
-                        for (int i = 0; i < data.Length; i++)
-                            Console.Write("{0} ", (int)data[i]);
-                        Console.WriteLine("");
-
-                    } catch(Exception err)
-                    {
-                        Console.WriteLine(err.Message);
-                    }
+                    int[] data = api.GetState();
+                    Console.Write("Ответ:");
+                    for (int i = 0; i < data.Length; i++)
+                        Console.Write("{0} ", (int)data[i]);
+                    Console.WriteLine("");
                 }
 
                 if(keyInfo.Key == ConsoleKey.A)
@@ -49,6 +42,11 @@ namespace TestInterface
                 }
 
                 if(keyInfo.Key == ConsoleKey.D)
+                {
+                    api.AddDefectiveProduct();
+                }
+
+                if(keyInfo.Key == ConsoleKey.P)
                 {
                 }
 
