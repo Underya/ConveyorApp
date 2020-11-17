@@ -34,6 +34,14 @@ namespace TestInterface
                     try
                     {
                         sendSocket.SendMessage(GetMesage, GetMesage.Length);
+                        //Получение ответа
+                        int retSize = -1;
+                        byte[] data = sendSocket.GetAnswer(out retSize);
+                        Console.Write("Ответ:");
+                        for (int i = 0; i < retSize; i++)
+                            Console.Write("{0} ", (int)data[i]);
+                        Console.WriteLine("");
+
                     } catch(Exception err)
                     {
                         Console.WriteLine(err.Message);
@@ -43,11 +51,13 @@ namespace TestInterface
                 if(keyInfo.Key == ConsoleKey.A)
                 {
                     sendSocket.SendMessage(AddProduct, AddProduct.Length);
+                    AddAnswer(sendSocket);
                 }
 
                 if(keyInfo.Key == ConsoleKey.D)
                 {
                     sendSocket.SendMessage(AddDefective, AddDefective.Length);
+                    AddAnswer(sendSocket);
                 }
 
                 if (keyInfo.Key == ConsoleKey.E)
@@ -59,6 +69,16 @@ namespace TestInterface
 
             Console.WriteLine("Нажмите любую клавишу");
             Console.ReadKey();
+        }
+
+        static void AddAnswer(SendSocket socket)
+        {
+            int size = -1;
+            byte[] res = socket.GetAnswer(out size);
+            if(size != 0)
+            {
+                Console.WriteLine("Ответ получен - {0}", Encoding.Unicode.GetString(res, 0, size));
+            }
         }
 
         static byte[] ToUnicodeByte(string Message)

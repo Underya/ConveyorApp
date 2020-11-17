@@ -22,12 +22,45 @@ namespace NetApi
         }
 
         /// <summary>
+        /// Сохранения сокета для получения ответа от сервера
+        /// </summary>
+        Socket answerSocket = null;
+
+        /// <summary>
+        /// Создание сокета для получения сообщений
+        /// </summary>
+        void GetSendSocket()
+        {
+            //Если есть сокет, его надо закрыть
+            if(answerSocket != null)
+            {
+                answerSocket.Shutdown(SocketShutdown.Both);
+                answerSocket.Close();
+            }
+
+            //Создание нового
+            answerSocket = GetNewSoket();
+            answerSocket.Connect(ipAdress);
+        }
+
+        /// <summary>
         /// Попытка соедениться с указанным адресом.
         /// В случае неудаче выбрасывается исключение
         /// </summary>
         public void Connect()
         {
             socket.Connect(ipAdress);
+        }
+
+        /// <summary>
+        /// Получение ответа на запрос
+        /// </summary>
+        /// <returns></returns>
+        public byte[] GetAnswer(out int SizeMessage)
+        {
+            byte[] Data = new byte[3000];
+            SizeMessage = answerSocket.Receive(Data);
+            return Data;
         }
 
         /// <summary>
@@ -40,10 +73,9 @@ namespace NetApi
         public bool SendMessage(byte[] Message, int MessageSize)
         {
             //СОздание нового сокета
-            Socket nsocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            nsocket.Connect(ipAdress);
+            GetSendSocket();
             //Отправка сообщения
-            int rezult = nsocket.Send(Message);
+            int rezult = answerSocket.Send(Message);
 
             bool returnResult = true;
 
@@ -52,8 +84,6 @@ namespace NetApi
             if (rezult != MessageSize)
                 returnResult = false;
 
-            nsocket.Shutdown(SocketShutdown.Both);
-            nsocket.Close();
             //Сообщение успешно отправлено
             return returnResult;
         }

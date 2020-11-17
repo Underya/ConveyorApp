@@ -70,6 +70,8 @@ namespace ConveyorApp
             //В зависимости от типа сообщения, вызов соотсвествующей функции разбора
             if (Calling.ToLower() == "get")
                 GetCalling();
+            if (Calling.ToLower().Contains("add"))
+                AddNewProduct(Calling);
 
         }
 
@@ -81,6 +83,16 @@ namespace ConveyorApp
             //Отправка ответа
             byte[] resp = new byte[3] { 1, 2, 1 };
             listenSocket.SendAnswer(resp);
+        }
+
+        /// <summary>
+        /// Запрос на добавления новых элементов в очередь
+        /// </summary>
+        void AddNewProduct(string Answer)
+        {
+            //Отправка ответа
+            byte[] answer = Encoding.Unicode.GetBytes("Добавлен новый элемент");
+            listenSocket.SendAnswer(answer);
         }
 
     }
