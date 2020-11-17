@@ -17,6 +17,11 @@ namespace ConveyorApp
         bool work = false;
 
         /// <summary>
+        /// Объект для сериализации
+        /// </summary>
+        JSON json = null;
+
+        /// <summary>
         /// Конвеер с продуктами
         /// </summary>
         IConveyor conveyor = null;
@@ -38,6 +43,8 @@ namespace ConveyorApp
             listenSocket = ListenSocket;
             //Добавляется метод для прослушивания получаемых сообщений
             listenSocket.AcceptMessage += AcceptMessage;
+            //СОздание объекта для сериализации
+            json = new JSON();
         }
 
         /// <summary>
@@ -83,8 +90,9 @@ namespace ConveyorApp
             //Отправка ответа
             int[] resp = conveyor.State.ToArray();
             //Сериализация
-            JSON json = new JSON();
             listenSocket.SendAnswer(json.Serialize(resp));
+            //Сообщение об отправки состояния
+            Console.WriteLine("Отправлено состояние конвеера");
         }
 
         /// <summary>
@@ -92,9 +100,29 @@ namespace ConveyorApp
         /// </summary>
         void AddNewProduct(string Answer)
         {
-            //Отправка ответа
-            byte[] answer = Encoding.Unicode.GetBytes("Добавлен новый элемент");
-            listenSocket.SendAnswer(answer);
+            //Получение типа нового элемента
+            string type = Answer.Substring(Answer.IndexOf(':') + 1);
+            try
+            {
+                if (type == "1")
+                    //Добавление нового хорошего элемента
+                    conveyor.AddProduct(1);
+                else if (type == "2")
+                    //Добавление брака
+                    conveyor.AddProduct(2);
+                else
+                    //Выброс ошибки, о не правильной комманде добавления
+                    throw new Exception("Неправильная комманда добавления нового продукта");
+            }
+            catch (Exception exc)
+            {
+                //Отправление ошибки пользователю
+                listenSocket.SendAnswer(json.Serialize(exc));
+                return;
+            }
+
+            //Сообщение об успешно добавлении
+            listenSocket.SendAnswer(json.Serialize("Ok"));
         }
 
     }

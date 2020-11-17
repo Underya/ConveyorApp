@@ -45,6 +45,7 @@ namespace TestInterface
 
                 if(keyInfo.Key == ConsoleKey.A)
                 {
+                    api.AddGoodProduct();
                 }
 
                 if(keyInfo.Key == ConsoleKey.D)

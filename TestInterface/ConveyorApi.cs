@@ -15,7 +15,25 @@ namespace TestInterface
         /// </summary>
         SendSocket sendSocket = null;
 
+        /// <summary>
+        /// Комманда получения состоиния
+        /// </summary>
         byte[] GetCommand = null;
+
+        /// <summary>
+        /// Комманда добавления хорошего продукта
+        /// </summary>
+        byte[] AddGoodCommand = null;
+
+        /// <summary>
+        /// Комманда добавления бракованного продукта
+        /// </summary>
+        byte[] AddDefectiveCommmand = null;
+
+        /// <summary>
+        /// Комманда удаления продукта с конвеера
+        /// </summary>
+        byte[] PushCommand = null;
 
         /// <summary>
         /// Создание новго АПИ для работы с конвеером
@@ -33,6 +51,9 @@ namespace TestInterface
         void InitialCommand()
         {
             GetCommand = Encoding.Unicode.GetBytes("get");
+            AddGoodCommand = Encoding.Unicode.GetBytes("add:1");
+            AddDefectiveCommmand = Encoding.Unicode.GetBytes("add:2");
+            PushCommand = Encoding.Unicode.GetBytes("push");
         }
 
         /// <summary>
@@ -49,6 +70,19 @@ namespace TestInterface
             object answerObj = ConvertToObjThrow(answer);
             //Возвращение результатов
             return (Int32[])answerObj;
+        }
+
+        /// <summary>
+        /// Метод добавляет годный продукт в конвеер
+        /// </summary>
+        public void AddGoodProduct()
+        {
+            sendSocket.SendMessage(AddGoodCommand, AddGoodCommand.Length);
+            //Получение ответа
+            int sizeAnswer = 0;
+            byte[] answer = sendSocket.GetAnswer(out sizeAnswer);
+            //Результат не интересен, только ощибка интеренсна
+            ConvertToObjThrow(answer);
         }
 
         /// <summary>
