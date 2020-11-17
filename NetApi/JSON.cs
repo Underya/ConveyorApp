@@ -9,7 +9,7 @@ namespace NetApi
     /// <summary>
     /// Методы для сериализации и десериалазции объектов
     /// </summary>
-    class JSON
+    public class JSON
     {
         /// <summary>
         /// Сериализация объекта 
@@ -18,8 +18,14 @@ namespace NetApi
         /// <returns></returns>
         public byte[] Serialize(object obj)
         {
-            string res = JsonSerializer.Serialize(obj);
-            return Encoding.Unicode.GetBytes(res);
+            string res = JsonSerializer.Serialize(obj, obj.GetType());
+            //К объекту приписывается его тип
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append("Type:");
+            stringBuilder.Append(obj.GetType().Name);
+            stringBuilder.Append(";");
+            stringBuilder.Append(res);
+            return Encoding.Unicode.GetBytes(stringBuilder.ToString());
         }
 
         /*

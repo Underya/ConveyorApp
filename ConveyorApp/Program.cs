@@ -1,5 +1,6 @@
 ﻿using NetApi;
 using System;
+using System.Text.Json;
 
 namespace ConveyorApp
 {
@@ -7,6 +8,11 @@ namespace ConveyorApp
     {
         static void Main(string[] args)
         {
+            JSON json = new JSON();
+            json.Serialize("text");
+            json.Serialize(new Exception("excetpion text"));
+            json.Serialize(new int[3] { 1, 2, 1 });
+            return;
             try
             {
                 QueueConveyor queueConveyor = new QueueConveyor();
