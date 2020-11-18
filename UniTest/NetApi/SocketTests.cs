@@ -42,7 +42,7 @@ namespace UniTest.NetApi
             SendSocket SendSocket = new SendSocket(address3, port3);
             try
             {
-                SendSocket.Connect();
+                SendSocket.SendMessage(new byte[] { 1, 2 }, 2);
             }
             catch
             {

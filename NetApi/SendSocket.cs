@@ -42,7 +42,7 @@ namespace NetApi
         /// Попытка соедениться с указанным адресом.
         /// В случае неудаче выбрасывается исключение
         /// </summary>
-        public void Connect()
+        void Connect()
         {
             
             try
