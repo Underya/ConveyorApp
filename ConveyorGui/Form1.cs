@@ -79,10 +79,10 @@ namespace ConveyorGui
             //Попытка подключения
             try
             {
-                //Пересоздаётся объект для нового сокета
-                api = null;
-                SendSocket sendSocket = new SendSocket("127.0.0.1", 8001);
-                api = new ConveyorApi(sendSocket);
+                ////Пересоздаётся объект для нового сокета
+                //api = null;
+                //SendSocket sendSocket = new SendSocket("127.0.0.1", 8001);
+                //api = new ConveyorApi(sendSocket);
                 api.GetState();
             }
             catch

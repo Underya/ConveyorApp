@@ -22,25 +22,20 @@ namespace NetApi
         }
 
         /// <summary>
-        /// Сохранения сокета для получения ответа от сервера
-        /// </summary>
-        Socket answerSocket = null;
-
-        /// <summary>
         /// Создание сокета для получения сообщений
         /// </summary>
         void GetSendSocket()
         {
             //Если есть сокет, его надо закрыть
-            if(answerSocket != null)
+            if(socket != null)
             {
-                answerSocket.Shutdown(SocketShutdown.Both);
-                answerSocket.Close();
+                socket.Shutdown(SocketShutdown.Both);
+                socket.Close();
             }
 
             //Создание нового
-            answerSocket = GetNewSoket();
-            answerSocket.Connect(ipAdress);
+            socket = GetNewSoket();
+            Connect();
         }
 
         /// <summary>
@@ -49,7 +44,19 @@ namespace NetApi
         /// </summary>
         public void Connect()
         {
-            socket.Connect(ipAdress);
+            
+            try
+            {
+                socket.Connect(ipAdress);
+            } catch(Exception exc)
+            {
+                //В случае, если не было установленно соеденение 
+                //То сокет закрывается и удаляется, что бы создать новый
+                socket.Close();
+                socket = null;
+                //Ошибка выбрасывается дальше
+                throw exc;
+            }
         }
 
         /// <summary>
@@ -59,7 +66,7 @@ namespace NetApi
         public byte[] GetAnswer(out int SizeMessage)
         {
             byte[] Data = new byte[3000];
-            SizeMessage = answerSocket.Receive(Data);
+            SizeMessage = socket.Receive(Data);
             //Обрезка
             byte[] retData = new byte[SizeMessage];
             for (int i = 0; i < SizeMessage; i++)
@@ -78,7 +85,7 @@ namespace NetApi
             //СОздание нового сокета
             GetSendSocket();
             //Отправка сообщения
-            int rezult = answerSocket.Send(Message);
+            int rezult = socket.Send(Message);
 
             bool returnResult = true;
 
