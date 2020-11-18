@@ -37,6 +37,8 @@ namespace ConveyorGui
         /// </summary>
         void TryConnect()
         {
+            //Обновление количества попыток
+            MaxCountConnect = 9;
             //Попытка подключения
             try
             {
@@ -50,8 +52,8 @@ namespace ConveyorGui
                 timer.Tick += TimerTick;
                 timer.Start();
                 //Пользователю выводиться сообщение
-                MessageBox.Show($"Не удалось подклюиться к серверу. Осталось попыток: {MaxCountConnect}");
-                ShowError($"Не удалось подклюиться к серверу. Осталось попыток: {MaxCountConnect}");
+                MessageBox.Show($"Не удалось подключиться к серверу. Осталось попыток: {MaxCountConnect}");
+                ShowError($"Не удалось подклчюиться к серверу. Осталось попыток: {MaxCountConnect}");
                 return;
             }
 
@@ -79,16 +81,12 @@ namespace ConveyorGui
             //Попытка подключения
             try
             {
-                ////Пересоздаётся объект для нового сокета
-                //api = null;
-                //SendSocket sendSocket = new SendSocket("127.0.0.1", 8001);
-                //api = new ConveyorApi(sendSocket);
                 api.GetState();
             }
             catch
             {
                 //Если вылтело исключение - то продолжать подключаться дальше
-                ShowError($"Не удалось подклюиться к серверу. Осталось попыток: {MaxCountConnect}");
+                ShowError($"Не удалось подключиться к серверу. Осталось попыток: {MaxCountConnect}");
                 return;
             }
 
@@ -123,6 +121,19 @@ namespace ConveyorGui
         }
 
         /// <summary>
+        /// Метод прекращает работу формы
+        /// </summary>
+        void StopWork()
+        {
+            AddButton.Enabled = false;
+            PushButton.Enabled = false;
+            //Очищение панели с продуктами
+            ConveyorPanel.Controls.Clear();
+            //Попытка подключения заново
+            TryConnect();
+        }
+
+        /// <summary>
         /// Заполнение панели с элементами конвейера
         /// </summary>
         void RefreshPanel()
@@ -135,6 +146,8 @@ namespace ConveyorGui
             catch
             {
                 ShowError("Не удалось получить состояние сервера!");
+                //Остановить работу формы
+                StopWork();
                 return;
             }
             //Скрытие ошибок
@@ -172,9 +185,15 @@ namespace ConveyorGui
                 //Если выбран дефективный продукт
                 if (DefectiveButton.Checked)
                     api.AddDefectiveProduct();
-            } catch(Exception err)
+            } 
+            catch(Exception err)
             {
                 ShowError(err.Message);
+                //Если ошибка была вызвана при подключении
+                if (err.StackTrace.Contains("SendSocket"))
+                {
+                    StopWork();
+                }
                 return;
             }
             //Обновление конвейера
@@ -194,6 +213,11 @@ namespace ConveyorGui
             } catch(Exception err)
             {
                 ShowError(err.Message);
+                //Если ошибка была вызвана при подключении
+                if (err.StackTrace.Contains("SendSocket"))
+                {
+                    StopWork();
+                }
                 return;
             }
             //Обновление конвейера

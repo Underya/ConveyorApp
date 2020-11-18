@@ -149,14 +149,14 @@ namespace ConveyorGui
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(234, 261);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(460, 100);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(576, 100);
             this.flowLayoutPanel1.TabIndex = 7;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(716, 373);
+            this.ClientSize = new System.Drawing.Size(822, 373);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.ErrorHandler);
             this.Controls.Add(this.label1);
